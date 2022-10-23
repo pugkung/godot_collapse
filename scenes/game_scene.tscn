@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/grid.gd" type="Script" id=1]
+
+[node name="game_scene" type="Node2D"]
+
+[node name="grid" type="Node2D" parent="."]
+script = ExtResource( 1 )
+width = 7
+height = 7
+x_start = 82
+y_start = 640
+offset = 72
