@@ -9,8 +9,6 @@ func _ready():
 
 
 func move(target):
-	print(position)
-	print(target)
 	move_tween.interpolate_property(self, "position", position, target, .2,
 									Tween.TRANS_CUBIC, Tween.EASE_OUT)
 	move_tween.start()

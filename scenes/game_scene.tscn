@@ -1,8 +1,19 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/grid.gd" type="Script" id=1]
+[ext_resource path="res://fonts/Kenney Pixel.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://game_ui.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 2 )
 
 [node name="game_scene" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="grid" type="Node2D" parent="."]
 script = ExtResource( 1 )
@@ -12,3 +23,65 @@ x_start = 82
 y_start = 640
 offset = 72
 y_offset = -2
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 456.0
+margin_top = 912.0
+margin_right = 514.0
+margin_bottom = 942.0
+custom_fonts/font = SubResource( 1 )
+text = "Quit"
+
+[node name="Label" type="Label" parent="."]
+margin_left = 48.0
+margin_top = 24.0
+margin_right = 108.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 2 )
+text = "Score"
+align = 1
+
+[node name="score_label" type="Label" parent="Label"]
+margin_top = 32.0
+margin_right = 60.0
+margin_bottom = 56.0
+custom_fonts/font = SubResource( 2 )
+text = "0"
+align = 1
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 448.0
+margin_top = 24.0
+margin_right = 508.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 2 )
+text = "Life"
+align = 1
+
+[node name="life_label" type="Label" parent="Label2"]
+margin_top = 32.0
+margin_right = 60.0
+margin_bottom = 56.0
+custom_fonts/font = SubResource( 2 )
+text = "5"
+align = 1
+
+[node name="gameover_label" type="Label" parent="."]
+margin_left = 208.0
+margin_top = 760.0
+margin_right = 342.0
+margin_bottom = 838.0
+custom_fonts/font = SubResource( 2 )
+text = "Life Depleted
+
+Game Over"
+align = 1
+
+[connection signal="show_gameover" from="grid" to="." method="_on_grid_show_gameover"]
+[connection signal="update_life" from="grid" to="." method="_on_grid_update_life"]
+[connection signal="update_score" from="grid" to="." method="_on_grid_update_score"]
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
