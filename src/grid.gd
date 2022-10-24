@@ -15,11 +15,17 @@ var pieces_list = [
 	preload("res://scenes/white_piece.tscn")
 ]
 
+var score = 0
+var life = 0
+
 var all_pieces = []
 
 var touch_pos = Vector2(0,0)
 
 func _ready():
+	score = 0
+	life = 5
+	
 	randomize()
 	all_pieces = make_2d_array()
 	spawn_pieces()
@@ -55,8 +61,8 @@ func grid_to_pixel(col, row):
 
 
 func pixel_to_grid(pos_x, pos_y):
-	var new_x = round(abs((pos_x - x_start + 32) / offset))
-	var new_y = round(abs((pos_y - y_start + 32) / -offset))
+	var new_x = round((pos_x - x_start + 32) / offset)
+	var new_y = round((pos_y - y_start + 32) / -offset)
 	return Vector2(new_x, new_y)
 
 
@@ -73,9 +79,12 @@ func touch_input():
 		var grid_pos = pixel_to_grid(touch_pos.x, touch_pos.y)
 		if is_in_grid(grid_pos.x, grid_pos.y):
 			var grid_list = get_neighbour_matches(grid_pos.x, grid_pos.y)
-			if len(grid_list) >= 2:
-				destroy_pieces(grid_list)
-	pass
+			var count = len(grid_list)
+			if count <= 3:
+				life -= 1
+			score += count
+			destroy_pieces(grid_list)
+			print("score: " + str(score) + " | life: " + str(life))
 
 
 func get_neighbour_matches(i,j):
@@ -109,7 +118,6 @@ func _process(delta):
 
 func destroy_pieces(destroy_list):
 	for pos in destroy_list:
-		print(pos)
 		if all_pieces[pos.x][pos.y] != null:
 			all_pieces[pos.x][pos.y].queue_free()
 			all_pieces[pos.x][pos.y] = null
