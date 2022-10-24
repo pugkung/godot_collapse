@@ -1,0 +1,97 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/menu.gd" type="Script" id=1]
+[ext_resource path="res://fonts/Kenney Pixel.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 72
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+font_data = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_right = 540.0
+margin_bottom = 960.0
+
+[node name="LeftPadding" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+margin_right = 99.0
+margin_bottom = 960.0
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_left = 103.0
+margin_right = 437.0
+margin_bottom = 960.0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_right = 334.0
+margin_bottom = 163.0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 167.0
+margin_right = 334.0
+margin_bottom = 221.0
+custom_fonts/font = SubResource( 1 )
+text = "Collapse Game"
+align = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 225.0
+margin_right = 334.0
+margin_bottom = 389.0
+size_flags_vertical = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 393.0
+margin_right = 334.0
+margin_bottom = 579.0
+custom_fonts/font = SubResource( 3 )
+text = "Game Rule
+
+Try to destroy blocks 
+with  more than  [ 4 ]   
+connecting colors
+ Life will be deplete 
+for destroying fewer blocks"
+align = 1
+
+[node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 583.0
+margin_right = 334.0
+margin_bottom = 746.0
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 750.0
+margin_right = 334.0
+margin_bottom = 792.0
+custom_fonts/font = SubResource( 2 )
+text = "Start"
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 796.0
+margin_right = 334.0
+margin_bottom = 960.0
+size_flags_vertical = 3
+
+[node name="RightPadding" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+margin_left = 441.0
+margin_right = 540.0
+margin_bottom = 960.0
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]

@@ -15,9 +15,13 @@ var pieces_list = [
 	preload("res://scenes/white_piece.tscn")
 ]
 
-var score = 0
-var life = 0
+signal update_score
+signal update_life
+signal show_gameover
+export (int) var score = 0
+export (int) var life = 0
 
+var is_game_over = false
 var all_pieces = []
 
 var touch_pos = Vector2(0,0)
@@ -25,6 +29,7 @@ var touch_pos = Vector2(0,0)
 func _ready():
 	score = 0
 	life = 5
+	is_game_over = false
 	
 	randomize()
 	all_pieces = make_2d_array()
@@ -84,7 +89,12 @@ func touch_input():
 				life -= 1
 			score += count
 			destroy_pieces(grid_list)
-			print("score: " + str(score) + " | life: " + str(life))
+			emit_signal("update_score", score)
+			emit_signal("update_life", life)
+			
+			if life <= 0:
+				is_game_over = true
+				emit_signal("show_gameover")
 
 
 func get_neighbour_matches(i,j):
@@ -113,7 +123,8 @@ func traverse(matched_list, i, j, color):
 
 
 func _process(delta):
-	touch_input()
+	if not is_game_over:
+		touch_input()
 
 
 func destroy_pieces(destroy_list):
